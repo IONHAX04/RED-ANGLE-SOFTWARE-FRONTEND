@@ -4,6 +4,22 @@ p {
   margin: 0;
 }
 
+.p-tabview.p-component {
+  width: 100%;
+}
+
+.p-inputtext.p-chips-multiple-container {
+  width: 100%;
+}
+
+.p-tabview .p-tabview-panels {
+  padding: 10px 0px 0px 0px;
+}
+
+.p-toolbar.p-component {
+  padding: 3px 10px;
+}
+
 .p-float-label label {
   color: #6f1f5f;
 }
@@ -40,6 +56,15 @@ p {
 .p-inputtext:enabled:focus {
   box-shadow: none;
 }
+
+.p-chips:not(.p-disabled).p-focus .p-chips-multiple-container {
+  box-shadow: none;
+}
+
+.p-dropdown:not(.p-disabled).p-focus {
+  box-shadow: none;
+}
+
 .p-calendar:not(.p-calendar-disabled).p-focus > .p-inputtext {
   outline: none;
   outline-offset: none;
