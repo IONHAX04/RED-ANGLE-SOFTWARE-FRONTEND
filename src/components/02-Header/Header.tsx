@@ -10,32 +10,66 @@ import {
   PackageSearch,
   Settings,
   ShoppingCart,
+  FileText,
+  ClipboardList,
+  Users,
+  CalendarDays,
+  FileCheck,
 } from "lucide-react";
 
 import { Tooltip } from "primereact/tooltip";
-
 import logo from "../../assets/logo/Logo.png";
 
 const topRoutes = [
   {
     path: "/dashboard",
-    name: "DashBoard",
+    name: "Dashboard",
     icon: <LayoutGrid />,
   },
   {
-    path: "/inventory",
-    name: "Inventory",
+    path: "/leads",
+    name: "Leads",
     icon: <PackageSearch />,
   },
   {
-    path: "/pomgmt",
-    name: "Purchase Order",
+    path: "/assign-leads",
+    name: "Assign Leads",
+    icon: <ClipboardList />,
+  },
+  {
+    path: "/book-confirmation",
+    name: "Book Confirmation",
+    icon: <FileCheck />,
+  },
+  {
+    path: "/quotation",
+    name: "Quotation",
+    icon: <FileText />,
+  },
+  {
+    path: "/invoice",
+    name: "Invoice",
     icon: <ShoppingCart />,
   },
   {
-    path: "/notifications",
-    name: "Notifications",
+    path: "/approval",
+    name: "Approval",
     icon: <BellRing />,
+  },
+  {
+    path: "/employees",
+    name: "Employees",
+    icon: <Users />,
+  },
+  {
+    path: "/attendance",
+    name: "Attendance",
+    icon: <CalendarDays />,
+  },
+  {
+    path: "/leave-request",
+    name: "Leave Request",
+    icon: <ClipboardList />,
   },
 ];
 
@@ -52,7 +86,7 @@ const bottomRoutes = [
   },
   {
     path: "#",
-    name: "Logout",
+    name: "",
     icon: <LogOut />,
   },
 ];
@@ -62,11 +96,10 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ children }) => {
-  const isOpen = false;
   const location = useLocation();
   const navigate = useNavigate();
 
-  const hideSidebarPaths = ["/dfsdf"];
+  const hideSidebarPaths = ["/login", "/register"];
 
   const handleLogout = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -84,7 +117,7 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
             <div
               className="sidebar"
               style={{
-                width: isOpen ? "15vw" : "75px",
+                width: "75px",
                 transition: "width 0.2s ease",
               }}
             >
@@ -94,9 +127,8 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
                   alt="Company Logo"
                   className="app-logo"
                   style={{
-                    width: isOpen ? "120px" : "40px",
+                    width: "40px",
                     height: "auto",
-                    transition: "width 0.2s ease",
                   }}
                 />
               </div>
@@ -109,11 +141,10 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
                     className={({ isActive }) =>
                       `link ${isActive ? "active" : ""}`
                     }
-                    data-pr-tooltip={!isOpen ? route.name : undefined}
+                    data-pr-tooltip={route.name}
                     data-pr-position="right"
                   >
                     <div className="icon">{route.icon}</div>
-                    {isOpen && <div className="link_text">{route.name}</div>}
                   </NavLink>
                 ))}
               </section>
@@ -127,14 +158,11 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
                       className={`link ${
                         location.pathname === "/logout" ? "active" : ""
                       }`}
-                      onClick={(e) => handleLogout(e)}
-                      data-pr-tooltip={!isOpen ? route.name : undefined}
+                      onClick={handleLogout}
+                      data-pr-tooltip={route.name}
                       data-pr-position="right"
                     >
                       <div className="icon">{route.icon}</div>
-                      {isOpen && (
-                        <span className="link_text">{route.name}</span>
-                      )}
                     </NavLink>
                   ) : (
                     <NavLink
@@ -143,13 +171,10 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
                       className={({ isActive }) =>
                         `link ${isActive ? "active" : ""}`
                       }
-                      data-pr-tooltip={!isOpen ? route.name : undefined}
+                      data-pr-tooltip={route.name}
                       data-pr-position="right"
                     >
                       <div className="icon">{route.icon}</div>
-                      {isOpen && (
-                        <span className="link_text">{route.name}</span>
-                      )}
                     </NavLink>
                   )
                 )}
@@ -158,8 +183,11 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
 
             <main
               style={{
-                width: isOpen ? "85vw" : "97vw",
-                marginLeft: "75px",
+                width: "95vw",
+                marginLeft: "90px",
+                marginTop: "10px",
+                marginBottom: "10px",
+                marginRight: "10px",
                 transition: "width 0.2s ease, margin-left 0.2s ease",
               }}
             >
@@ -167,6 +195,7 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
             </main>
           </>
         )}
+
         {hideSidebarPaths.includes(location.pathname) && (
           <main style={{ width: "100vw" }}>{children}</main>
         )}

@@ -1,0 +1,21 @@
+.secondaryHeader {
+  width: 100%;
+  padding: 10px 15px;
+  border-radius: 10px;
+  border: 1px solid #22222233;
+  box-shadow: 1px 4px 8px rgba(0, 0, 0, 0.15);
+  background-color: #ffffff;
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.secondaryHeader .title {
+  font-weight: 600;
+  font-size: 20px;
+  color: #222;
+}
+
+.secondaryHeader .dateTime {
+  font-size: 14px;
+  color: #555;
+  text-align: right;
+}
