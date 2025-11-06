@@ -85,8 +85,8 @@ const bottomRoutes = [
     icon: <CircleUserRound />,
   },
   {
-    path: "#",
-    name: "",
+    path: "/logout",
+    name: "Logout",
     icon: <LogOut />,
   },
 ];

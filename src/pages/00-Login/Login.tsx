@@ -7,9 +7,12 @@ import { Button } from "primereact/button";
 import { useNavigate } from "react-router-dom";
 import { Toast } from "primereact/toast";
 import { ProgressSpinner } from "primereact/progressspinner";
+import axios from "axios";
 
 import LoginImage from "../../assets/logo/Logo.png";
 import logoImage from "../../assets/logo/Logo.png";
+
+const API_URL = import.meta.env.VITE_API_URL; // your backend base URL
 
 const Login: React.FC = () => {
   const [username, setUsername] = useState("");
@@ -18,6 +21,21 @@ const Login: React.FC = () => {
   const toast = useRef<Toast>(null);
   const navigate = useNavigate();
 
+  // ===== Login API call =====
+  const loginUser = async (payload: { email: string; password: string }) => {
+    try {
+      const response = await axios.post(`${API_URL}/routes/login`, payload, {
+        headers: { "Content-Type": "application/json" },
+      });
+      return response.data;
+    } catch (error: any) {
+      throw new Error(
+        error.response?.data?.message || error.message || "Login failed"
+      );
+    }
+  };
+
+  // ===== Login handler =====
   const onLogin = async () => {
     if (!username || !password) {
       toast.current?.show({
@@ -30,6 +48,42 @@ const Login: React.FC = () => {
     }
 
     setLoading(true);
+
+    try {
+      const payload = { email: username, password };
+      const result = await loginUser(payload);
+
+      if (result.success) {
+        toast.current?.show({
+          severity: "success",
+          summary: "Login Successful",
+          detail: "Welcome back!",
+          life: 3000,
+        });
+
+        // Store user info / token in localStorage
+        localStorage.setItem("userDetails", JSON.stringify(result.data[0]));
+
+        // Redirect to dashboard or leads page
+        navigate("/leads/view");
+      } else {
+        toast.current?.show({
+          severity: "error",
+          summary: "Login Failed",
+          detail: result.message || "Invalid credentials",
+          life: 3000,
+        });
+      }
+    } catch (error: any) {
+      toast.current?.show({
+        severity: "error",
+        summary: "Error",
+        detail: error.message,
+        life: 3000,
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -100,7 +154,6 @@ const Login: React.FC = () => {
             {loading && (
               <ProgressSpinner
                 style={{ width: "20px", height: "20px" }}
-                strokeWidth="4"
               />
             )}
           </Button>
