@@ -64,7 +64,7 @@ const LeaveReq: React.FC = () => {
     <div>
       <SecondaryHeader title="Leave Request" />
 
-      <div className="mt-3 rounded-lg shadow-lg">
+      <div className="mt-3 p-3 rounded-lg shadow-lg">
         <Toolbar right={rightToolbarTemplate} />
 
         <DataTable

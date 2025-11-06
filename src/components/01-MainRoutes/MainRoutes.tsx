@@ -7,6 +7,7 @@ import Settings from "../../pages/11-Settings/Settings";
 import Leads from "../../pages/02-Leads/Leads";
 import LeaveReq from "../../pages/10-LeaveReq/LeaveReq";
 import Attendance from "../../pages/09-Attendance/Attendance";
+import Employees from "../../pages/08-Employees/Employees";
 
 const ProtectedRoute: React.FC<{ children: JSX.Element }> = ({ children }) => {
   // const isLoggedIn = localStorage.getItem("userDetails");
@@ -55,6 +56,14 @@ const MainRoutes: React.FC = () => {
               element={
                 <ProtectedRoute>
                   <Attendance />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/employees"
+              element={
+                <ProtectedRoute>
+                  <Employees />
                 </ProtectedRoute>
               }
             />

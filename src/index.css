@@ -56,3 +56,11 @@ Specificity: (0,2,2)
 .p-button {
   box-shadow: none;
 }
+
+.p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+  background: #060606;
+  border-color: #ffffff;
+  color: #ffffff;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}

@@ -249,40 +249,58 @@ const Package: React.FC = () => {
           value={packages}
           paginator
           rows={5}
+          className="p-datatable-sm"
           stripedRows
           showGridlines
         >
           <Column
             header="S.No"
             body={(_data, { rowIndex }) => rowIndex + 1}
-            style={{ width: "6rem" }}
-          />
-          <Column
-            header="Actions"
-            body={(rowData) => (
-              <div className="flex gap-3 justify-center">
-                <Eye
-                  size={18}
-                  className="cursor-pointer text-blue-500"
-                  onClick={() => handleViewPackage(rowData.id)}
-                />
-                <Pencil
-                  size={18}
-                  className="cursor-pointer text-green-500"
-                  onClick={() => handleEditPackage(rowData)}
-                />
-                <Trash
-                  size={18}
-                  className="cursor-pointer text-red-500"
-                  onClick={() => handleDeletePackage(rowData.id)}
-                />
-              </div>
-            )}
+            style={{ width: "6rem", textAlign: "center" }}
           />
           <Column field="title" header="Title" />
           <Column field="package_title" header="Package Title" />
           <Column field="package_type" header="Price Title" />
           <Column field="price" header="Price" />
+
+          {/* 👁 View Column */}
+          <Column
+            header="View"
+            body={(rowData) => (
+              <Eye
+                size={18}
+                className="cursor-pointer text-blue-500"
+                onClick={() => handleViewPackage(rowData.id)}
+              />
+            )}
+            style={{ width: "6rem", textAlign: "center" }}
+          />
+
+          {/* ✏️ Edit Column */}
+          <Column
+            header="Edit"
+            body={(rowData) => (
+              <Pencil
+                size={18}
+                className="cursor-pointer text-green-500"
+                onClick={() => handleEditPackage(rowData)}
+              />
+            )}
+            style={{ width: "6rem", textAlign: "center" }}
+          />
+
+          {/* 🗑 Delete Column */}
+          <Column
+            header="Delete"
+            body={(rowData) => (
+              <Trash
+                size={18}
+                className="cursor-pointer text-red-500"
+                onClick={() => handleDeletePackage(rowData.id)}
+              />
+            )}
+            style={{ width: "6rem", textAlign: "center" }}
+          />
         </DataTable>
       )}
 
