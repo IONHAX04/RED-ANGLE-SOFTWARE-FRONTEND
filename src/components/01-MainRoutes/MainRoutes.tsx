@@ -11,6 +11,9 @@ import Employees from "../../pages/08-Employees/Employees";
 import ViewLeads from "../02-LeadsComponents/ViewLeads/ViewLeads";
 import AssignLeads from "../03-AssignLeads/AssignLeads";
 import BookConfirmation from "../../pages/03-BookConfirmation/BookConfirmation";
+import AddQuotation from "../04-QuotationComponents/AddQuotation/AddQuotation";
+import Invoice from "../../pages/04-Invoice/Invoice";
+import Approval from "../../pages/05-Approval/Approval";
 
 const ProtectedRoute: React.FC<{ children: JSX.Element }> = ({ children }) => {
   // const isLoggedIn = localStorage.getItem("userDetails");
@@ -95,6 +98,34 @@ const MainRoutes: React.FC = () => {
                 </ProtectedRoute>
               }
             />
+
+            <Route
+              path="/quotation"
+              element={
+                <ProtectedRoute>
+                  <AddQuotation />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/invoice"
+              element={
+                <ProtectedRoute>
+                  <Invoice />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/approval"
+              element={
+                <ProtectedRoute>
+                  <Approval />
+                </ProtectedRoute>
+              }
+            />
+
             <Route
               path="/leads/add"
               element={

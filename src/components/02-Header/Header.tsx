@@ -183,7 +183,7 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
 
             <main
               style={{
-                width: "95vw",
+                width: "93vw",
                 marginLeft: "90px",
                 marginTop: "10px",
                 marginBottom: "10px",
