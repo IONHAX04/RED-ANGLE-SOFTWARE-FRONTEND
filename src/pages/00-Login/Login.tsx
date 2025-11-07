@@ -65,7 +65,7 @@ const Login: React.FC = () => {
         localStorage.setItem("userDetails", JSON.stringify(result.data[0]));
 
         // Redirect to dashboard or leads page
-        navigate("/leads/view");
+        navigate("/leads");
       } else {
         toast.current?.show({
           severity: "error",

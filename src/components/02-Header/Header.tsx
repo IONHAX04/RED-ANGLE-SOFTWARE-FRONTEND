@@ -5,7 +5,6 @@ import "./Header.css";
 import {
   BellRing,
   CircleUserRound,
-  LayoutGrid,
   LogOut,
   PackageSearch,
   Settings,
@@ -21,11 +20,11 @@ import { Tooltip } from "primereact/tooltip";
 import logo from "../../assets/logo/logo.png";
 
 const topRoutes = [
-  {
-    path: "/dashboard",
-    name: "Dashboard",
-    icon: <LayoutGrid />,
-  },
+  // {
+  //   path: "/dashboard",
+  //   name: "Dashboard",
+  //   icon: <LayoutGrid />,
+  // },
   {
     path: "/leads",
     name: "Leads",
