@@ -2,7 +2,7 @@ import React, { type JSX } from "react";
 import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import Header from "../02-Header/Header";
 import Login from "../../pages/00-Login/Login";
-import Dashboard from "../../pages/01-Dashboard/Dashboard";
+// import Dashboard from "../../pages/01-Dashboard/Dashboard";
 import Settings from "../../pages/11-Settings/Settings";
 import Leads from "../../pages/02-Leads/Leads";
 import LeaveReq from "../../pages/10-LeaveReq/LeaveReq";
@@ -37,7 +37,7 @@ const MainRoutes: React.FC = () => {
               path="/"
               element={
                 <ProtectedRoute>
-                  <Dashboard />
+                  <Settings />
                 </ProtectedRoute>
               }
             />

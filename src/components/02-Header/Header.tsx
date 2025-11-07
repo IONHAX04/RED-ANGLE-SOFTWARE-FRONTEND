@@ -4,7 +4,7 @@ import "./Header.css";
 
 import {
   BellRing,
-  CircleUserRound,
+  // CircleUserRound,
   LogOut,
   PackageSearch,
   Settings,
@@ -78,11 +78,11 @@ const bottomRoutes = [
     name: "Settings",
     icon: <Settings />,
   },
-  {
-    path: "/profile",
-    name: "Profile",
-    icon: <CircleUserRound />,
-  },
+  // {
+  //   path: "/profile",
+  //   name: "Profile",
+  //   icon: <CircleUserRound />,
+  // },
   {
     path: "/logout",
     name: "Logout",
