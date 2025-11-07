@@ -18,7 +18,7 @@ import {
 } from "lucide-react";
 
 import { Tooltip } from "primereact/tooltip";
-import logo from "../../assets/logo/Logo.png";
+import logo from "../../assets/logo/logo.png";
 
 const topRoutes = [
   {
