@@ -1,5 +1,5 @@
 import axios from "axios";
-import type { Employee } from "../../../pages/10-Employees/Employees.interface";
+import type { Employee } from "../../../pages/08-Employees/EmployeeDetails.interface";
 
 const API_URL = import.meta.env.VITE_API_URL;
 

@@ -8,6 +8,9 @@ import Leads from "../../pages/02-Leads/Leads";
 import LeaveReq from "../../pages/10-LeaveReq/LeaveReq";
 import Attendance from "../../pages/09-Attendance/Attendance";
 import Employees from "../../pages/08-Employees/Employees";
+import ViewLeads from "../02-LeadsComponents/ViewLeads/ViewLeads";
+import AssignLeads from "../03-AssignLeads/AssignLeads";
+import BookConfirmation from "../../pages/03-BookConfirmation/BookConfirmation";
 
 const ProtectedRoute: React.FC<{ children: JSX.Element }> = ({ children }) => {
   // const isLoggedIn = localStorage.getItem("userDetails");
@@ -64,6 +67,31 @@ const MainRoutes: React.FC = () => {
               element={
                 <ProtectedRoute>
                   <Employees />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/leads"
+              element={
+                <ProtectedRoute>
+                  <ViewLeads />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/assign-leads"
+              element={
+                <ProtectedRoute>
+                  <AssignLeads />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/book-confirmation"
+              element={
+                <ProtectedRoute>
+                  <BookConfirmation />
                 </ProtectedRoute>
               }
             />
