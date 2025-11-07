@@ -9,8 +9,8 @@ import { Toast } from "primereact/toast";
 import { ProgressSpinner } from "primereact/progressspinner";
 import axios from "axios";
 
-import LoginImage from "../../assets/logo/Logo.png";
-import logoImage from "../../assets/logo/Logo.png";
+import LoginImage from "../../assets/logo/logo.png";
+import logoImage from "../../assets/logo/logo.png";
 
 const API_URL = import.meta.env.VITE_API_URL; // your backend base URL
 
