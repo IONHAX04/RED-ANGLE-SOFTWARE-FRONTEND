@@ -96,11 +96,11 @@ const Users: React.FC = () => {
   };
 
   // 🔹 Open edit dialog
-  const handleEdit = (role: Role) => {
-    setEditRole(role);
-    setEditRoleName(role.roleName);
-    setEditDialogVisible(true);
-  };
+  // const handleEdit = (role: Role) => {
+  //   setEditRole(role);
+  //   setEditRoleName(role.roleName);
+  //   setEditDialogVisible(true);
+  // };
 
   // 🔹 Save edited role
   const handleSaveEdit = async () => {
@@ -151,13 +151,13 @@ const Users: React.FC = () => {
     fetchRoles();
   }, []);
 
-  const actionTemplate = (rowData: Role) => (
-    <Button
-      icon="pi pi-pencil"
-      className="p-button-sm p-button-info"
-      onClick={() => handleEdit(rowData)}
-    />
-  );
+  // const actionTemplate = (rowData: Role) => (
+  //   <Button
+  //     icon="pi pi-pencil"
+  //     className="p-button-sm p-button-info"
+  //     onClick={() => handleEdit(rowData)}
+  //   />
+  // );
 
   return (
     <div className="p-3">
@@ -204,11 +204,11 @@ const Users: React.FC = () => {
           }
         />
         <Column field="createdBy" header="Created By" />
-        <Column
+        {/* <Column
           header="Action"
           body={actionTemplate}
           style={{ width: "8rem", textAlign: "center" }}
-        />
+        /> */}
       </DataTable>
 
       {/* 🔹 Edit Dialog */}
