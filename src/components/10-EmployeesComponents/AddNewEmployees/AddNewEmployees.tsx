@@ -8,7 +8,8 @@ import { InputNumber } from "primereact/inputnumber";
 import { Chips } from "primereact/chips";
 import { InputTextarea } from "primereact/inputtextarea";
 import { Toast } from "primereact/toast";
-import { FileUpload, FileUploadSelectEvent } from "primereact/fileupload";
+import { FileUpload } from "primereact/fileupload";
+import type { FileUploadSelectEvent } from "primereact/fileupload";
 import axios from "axios";
 import { addEmployee, updateEmployee } from "./AddNewEmployees.function";
 
@@ -52,8 +53,12 @@ const AddNewEmployees: React.FC<AddNewEmployeesProps> = ({
     reason: "",
     role: "",
     notes: "",
-    profileImage: null as File | null,
-    aadharCard: null as File | null,
+    profileImage: null as string | null,
+    aadharCard: null as {
+      base64: string;
+      name: string;
+      type: string;
+    } | null,
   });
 
   // 🔹 Handle text or dropdown changes
@@ -88,14 +93,101 @@ const AddNewEmployees: React.FC<AddNewEmployeesProps> = ({
   };
 
   // 🔹 File selection handlers
-  const handleProfileImageSelect = (e: FileUploadSelectEvent) => {
+  // const handleProfileImageSelect = (e: FileUploadSelectEvent) => {
+  //   const file = e.files?.[0];
+  //   if (file) handleChange("profileImage", file);
+  // };
+
+  // const handleAadharSelect = (e: FileUploadSelectEvent) => {
+  //   const file = e.files?.[0];
+  //   if (file) handleChange("aadharCard", file);
+  // };
+
+  // 🔹 Upload Profile Image
+  const handleProfileImageUpload = async (e: FileUploadSelectEvent) => {
     const file = e.files?.[0];
-    if (file) handleChange("profileImage", file);
+    if (!file) return;
+
+    const fd = new FormData();
+    fd.append("profileImage", file);
+
+    try {
+      const res = await axios.post(`${API_URL}/routes/uploadProfileImage`, fd, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+
+      if (res.data.success) {
+        console.log("res.data", res.data);
+        const base64Image = `data:${res.data.contentType};base64,${res.data.base64}`;
+        setFormData((prev) => ({ ...prev, profileImage: base64Image }));
+
+        toast.current?.show({
+          severity: "success",
+          summary: "Uploaded",
+          detail: "Profile image uploaded successfully",
+        });
+      } else {
+        toast.current?.show({
+          severity: "warn",
+          summary: "Upload Failed",
+          detail: res.data.message || "Failed to upload image",
+        });
+      }
+    } catch (err: any) {
+      console.error(err);
+      toast.current?.show({
+        severity: "error",
+        summary: "Error",
+        detail: err.message || "Error uploading image",
+      });
+    }
   };
 
-  const handleAadharSelect = (e: FileUploadSelectEvent) => {
+  // 🔹 Upload Aadhaar Card
+  const handleAadharUpload = async (e: FileUploadSelectEvent) => {
     const file = e.files?.[0];
-    if (file) handleChange("aadharCard", file);
+    if (!file) return;
+
+    const fd = new FormData();
+    fd.append("aadharCard", file);
+
+    try {
+      const res = await axios.post(`${API_URL}/routes/uploadAadharCard`, fd, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+
+      if (res.data.success) {
+        console.log("res.data", res.data);
+        const base64Data = `data:${res.data.contentType};base64,${res.data.base64}`;
+        setFormData((prev) => ({
+          ...prev,
+          aadharCard: {
+            base64: base64Data,
+            name: file.name,
+            type: file.type,
+          },
+        }));
+
+        toast.current?.show({
+          severity: "success",
+          summary: "Uploaded",
+          detail: "Aadhaar card uploaded successfully",
+        });
+      } else {
+        toast.current?.show({
+          severity: "warn",
+          summary: "Upload Failed",
+          detail: res.data.message || "Failed to upload Aadhaar card",
+        });
+      }
+    } catch (err: any) {
+      console.error(err);
+      toast.current?.show({
+        severity: "error",
+        summary: "Error",
+        detail: err.message || "Error uploading Aadhaar card",
+      });
+    }
   };
 
   // 🔹 Validate form
@@ -215,33 +307,14 @@ const AddNewEmployees: React.FC<AddNewEmployeesProps> = ({
             accept="image/*"
             customUpload
             chooseLabel="Choose Image"
-            onSelect={handleProfileImageSelect}
-            auto
+            onSelect={handleProfileImageUpload}
           />
           {formData.profileImage && (
             <img
-              src={URL.createObjectURL(formData.profileImage)}
+              src={formData.profileImage}
               alt="Profile Preview"
-              className="w-32 h-32 object-cover rounded mt-2 border"
+              className="w-32 h-32 rounded border mt-2 object-cover"
             />
-          )}
-        </div>
-
-        <div className="flex-1 flex flex-column gap-2">
-          <label>Upload Aadhaar Card</label>
-          <FileUpload
-            mode="basic"
-            name="aadharCard"
-            accept="image/*,.pdf"
-            customUpload
-            chooseLabel="Choose File"
-            onSelect={handleAadharSelect}
-            auto
-          />
-          {formData.aadharCard && (
-            <p className="mt-2 text-sm text-gray-600">
-              Selected: {formData.aadharCard.name}
-            </p>
           )}
         </div>
       </div>
@@ -280,6 +353,46 @@ const AddNewEmployees: React.FC<AddNewEmployeesProps> = ({
         </div>
       </div>
 
+      <Divider />
+      <div className="flex-1 flex flex-column gap-2">
+        <label>Upload Aadhaar Card</label>
+        <FileUpload
+          mode="basic"
+          name="aadharCard"
+          accept="image/*,.pdf"
+          customUpload
+          chooseLabel="Choose File"
+          onSelect={handleAadharUpload}
+        />
+        {formData.aadharCard && (
+          <div className="mt-3">
+            {formData.aadharCard.type === "application/pdf" ? (
+              <>
+                <a
+                  href={formData.aadharCard.base64}
+                  download={formData.aadharCard.name}
+                  className="text-blue-500 underline"
+                >
+                  Download Aadhaar PDF
+                </a>
+                <iframe
+                  src={formData.aadharCard.base64}
+                  width="100%"
+                  height="300px"
+                  title="Aadhaar Preview"
+                  className="border mt-2"
+                />
+              </>
+            ) : (
+              <img
+                src={formData.aadharCard.base64}
+                alt="Aadhaar Preview"
+                className="w-40 h-40 object-cover rounded border"
+              />
+            )}
+          </div>
+        )}
+      </div>
       <Divider />
 
       {/* Communication Details */}

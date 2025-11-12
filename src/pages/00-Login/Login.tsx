@@ -145,8 +145,8 @@ const Login: React.FC = () => {
             label={loading ? "" : "Login"}
             className="w-full mt-3 loginButton uppercase font-bold flex justify-content-center align-items-center"
             style={{
-              backgroundColor: "#060606",
-              borderColor: "#060606",
+              backgroundColor: "#800080",
+              borderColor: "#800080",
             }}
             onClick={onLogin}
             disabled={loading}

@@ -1,5 +1,4 @@
 import axios from "axios";
-import type { Employee } from "../../../pages/08-Employees/EmployeeDetails.interface";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -24,15 +23,9 @@ export const addEmployee = async (employeeData: any) => {
   }
 };
 
-export const updateEmployee = async (
-  id: number,
-  employeeData: Partial<Employee>
-) => {
+export const updateEmployee = async (id: number, data: any) => {
   try {
-    const response = await axios.put(
-      `${API_URL}/routes/employees/${id}`,
-      employeeData
-    );
+    const response = await axios.put(`${API_URL}/routes/employees/${id}`, data);
     return response.data;
   } catch (error: any) {
     throw new Error(

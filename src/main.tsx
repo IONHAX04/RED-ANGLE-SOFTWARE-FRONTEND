@@ -44,10 +44,10 @@ import "primereact/resources/primereact.css";
 // import 'primereact/resources/themes/nano/theme.css'
 
 // SELECTED UI - 3
-import 'primereact/resources/themes/saga-blue/theme.css'
+// import 'primereact/resources/themes/saga-blue/theme.css'
 // import 'primereact/resources/themes/saga-green/theme.css'
 // import 'primereact/resources/themes/saga-orange/theme.css'
-// import "primereact/resources/themes/saga-purple/theme.css";
+import "primereact/resources/themes/saga-purple/theme.css";
 // import 'primereact/resources/themes/vela-blue/theme.css'
 // import 'primereact/resources/themes/vela-green/theme.css'
 // import 'primereact/resources/themes/vela-orange/theme.css'
