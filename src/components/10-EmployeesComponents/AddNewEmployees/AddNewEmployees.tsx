@@ -117,15 +117,13 @@ const AddNewEmployees: React.FC<AddNewEmployeesProps> = ({
       });
 
       if (res.data.success) {
-        console.log("res.data", res.data);
-        const base64Image = `data:${res.data.contentType};base64,${res.data.base64}`;
-        setFormData((prev) => ({ ...prev, profileImage: base64Image }));
-
-        toast.current?.show({
-          severity: "success",
-          summary: "Uploaded",
-          detail: "Profile image uploaded successfully",
-        });
+        setFormData((prev) => ({
+          ...prev,
+          profileImage: res.data.base64
+            ? `data:${res.data.contentType};base64,${res.data.base64}`
+            : prev.profileImage,
+          profileImagePath: res.data.filePath, // ✅ Save the path for DB
+        }));
       } else {
         toast.current?.show({
           severity: "warn",
@@ -156,23 +154,17 @@ const AddNewEmployees: React.FC<AddNewEmployeesProps> = ({
         headers: { "Content-Type": "multipart/form-data" },
       });
 
+      // Aadhaar Card Upload
       if (res.data.success) {
-        console.log("res.data", res.data);
-        const base64Data = `data:${res.data.contentType};base64,${res.data.base64}`;
         setFormData((prev) => ({
           ...prev,
           aadharCard: {
-            base64: base64Data,
+            base64: `data:${res.data.contentType};base64,${res.data.base64}`,
             name: file.name,
             type: file.type,
           },
+          aadharCardPath: res.data.filePath, // ✅ Save the path for DB
         }));
-
-        toast.current?.show({
-          severity: "success",
-          summary: "Uploaded",
-          detail: "Aadhaar card uploaded successfully",
-        });
       } else {
         toast.current?.show({
           severity: "warn",

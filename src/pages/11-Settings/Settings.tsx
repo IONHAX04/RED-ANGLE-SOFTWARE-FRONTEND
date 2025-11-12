@@ -6,11 +6,13 @@ import { Dialog } from "primereact/dialog";
 import Package from "../../components/11-Settings/Package";
 import UserSettings from "../../components/11-Settings/Users";
 import Addons from "../../components/11-Settings/Addons";
+// import Quotations from "../../components/11-Settings/Quotations";
 
 const Settings: React.FC = () => {
   const [showPackagesModal, setShowPackagesModal] = useState(false);
   const [showUsersModal, setShowUsersModal] = useState(false);
   const [showAddOnsModal, setShowAddOnsModal] = useState(false); // 👈 New state
+  // const [showQuotationsModel, setShowQuotationsModel] = useState(false);
 
   return (
     <div>
@@ -53,7 +55,16 @@ const Settings: React.FC = () => {
         </div>
 
         {/* (Optional) Empty placeholders */}
-        <div className="flex-1"></div>
+        <div className="flex-1">
+          {/* <div
+            className="cardContents"
+            onClick={() => setShowQuotationsModel(true)}
+            style={{ cursor: "pointer" }}
+          >
+            <BookMarked size={100} />
+            <p>Quotations</p>
+          </div> */}
+        </div>
         <div className="flex-1"></div>
         <div className="flex-1"></div>
       </div>
@@ -83,6 +94,17 @@ const Settings: React.FC = () => {
       </Dialog>
 
       {/* Add Ons Modal */}
+      {/* <Dialog
+        header="Add Quotations"
+        visible={showQuotationsModel}
+        onHide={() => setShowQuotationsModel(false)}
+        style={{ width: "95vw", height: "90vh" }}
+        dismissableMask
+        modal
+      >
+        <Quotations />
+      </Dialog> */}
+
       <Dialog
         header="Manage Add Ons"
         visible={showAddOnsModal}
